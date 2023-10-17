@@ -19,24 +19,32 @@ public final class TarjetaNoPersonalizada extends TuLlave implements Serializabl
 
     @Basic
     private String nombrePropietario;
-    private Integer Identificacion;
+    private Integer identificacion;
     private String telefono;
     private String sexo;
-
+    private double saldo;
+    private Integer numeroTarjeta;
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
+    @Temporal(TemporalType.DATE)
+    private Date fechaCreacion;
+    @Temporal(TemporalType.DATE)
+    private Date ultimoUso;
 
     public TarjetaNoPersonalizada() {
     }
 
-    public TarjetaNoPersonalizada(int id_nopersonalizada, String nombrePropietario, Integer Identificacion, String telefono, String sexo, Date fechaNacimiento, double saldo, Integer numeroTarjeta, Date fechaCreacion, Date ultimoUso) {
-        super(saldo, numeroTarjeta, fechaCreacion, ultimoUso);
+    public TarjetaNoPersonalizada(int id_nopersonalizada, String nombrePropietario, Integer identificacion, String telefono, String sexo, double saldo, Integer numeroTarjeta, Date fechaNacimiento, Date fechaCreacion, Date ultimoUso) {
         this.id_nopersonalizada = id_nopersonalizada;
         this.nombrePropietario = nombrePropietario;
-        this.Identificacion = Identificacion;
+        this.identificacion = identificacion;
         this.telefono = telefono;
         this.sexo = sexo;
+        this.saldo = saldo;
+        this.numeroTarjeta = numeroTarjeta;
         this.fechaNacimiento = fechaNacimiento;
+        this.fechaCreacion = fechaCreacion;
+        this.ultimoUso = ultimoUso;
     }
 
     public int getId_nopersonalizada() {
@@ -56,11 +64,11 @@ public final class TarjetaNoPersonalizada extends TuLlave implements Serializabl
     }
 
     public Integer getIdentificacion() {
-        return Identificacion;
+        return identificacion;
     }
 
-    public void setIdentificacion(Integer Identificacion) {
-        this.Identificacion = Identificacion;
+    public void setIdentificacion(Integer identificacion) {
+        this.identificacion = identificacion;
     }
 
     public String getTelefono() {
@@ -79,14 +87,6 @@ public final class TarjetaNoPersonalizada extends TuLlave implements Serializabl
         this.sexo = sexo;
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
     public double getSaldo() {
         return saldo;
     }
@@ -101,6 +101,14 @@ public final class TarjetaNoPersonalizada extends TuLlave implements Serializabl
 
     public void setNumeroTarjeta(Integer numeroTarjeta) {
         this.numeroTarjeta = numeroTarjeta;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public Date getFechaCreacion() {
@@ -118,10 +126,6 @@ public final class TarjetaNoPersonalizada extends TuLlave implements Serializabl
     public void setUltimoUso(Date ultimoUso) {
         this.ultimoUso = ultimoUso;
     }
-    
-    
-    
-   
 
     @Override
     public double descontar() {

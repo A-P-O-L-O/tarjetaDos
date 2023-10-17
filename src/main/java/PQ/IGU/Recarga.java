@@ -176,7 +176,7 @@ public class Recarga extends javax.swing.JFrame {
             Integer documento = Integer.parseInt(txtDocumento.getText());
             Integer recarga = Integer.parseInt(txtRecarga.getText());
             
-            control.recargar(documento,recarga);
+            ///control.recargar(documento,recarga);
 
         }
 

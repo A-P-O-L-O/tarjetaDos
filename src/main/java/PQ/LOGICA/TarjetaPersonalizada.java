@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,35 +23,29 @@ public final class TarjetaPersonalizada extends TuLlave implements Serializable 
     private Integer identificacion;
     private String telefono;
     private String sexo;
-
+    private double saldo;
+    private Integer numeroTarjeta;
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
-    
+    @Temporal(TemporalType.DATE)
+    private Date fechaCreacion;
+    @Temporal(TemporalType.DATE)
+    private Date ultimoUso;
+
     public TarjetaPersonalizada() {
     }
 
-    public TarjetaPersonalizada(int id_personalizada, String nombrePropietario, Integer identificacion, String telefono, String sexo, Date fechaNacimiento) {
+    public TarjetaPersonalizada(int id_personalizada, String nombrePropietario, Integer identificacion, String telefono, String sexo, double saldo, Integer numeroTarjeta, Date fechaNacimiento, Date fechaCreacion, Date ultimoUso) {
         this.id_personalizada = id_personalizada;
         this.nombrePropietario = nombrePropietario;
         this.identificacion = identificacion;
         this.telefono = telefono;
         this.sexo = sexo;
+        this.saldo = saldo;
+        this.numeroTarjeta = numeroTarjeta;
         this.fechaNacimiento = fechaNacimiento;
-    }
-    
-    
-    
-    
-    
-
-    public TarjetaPersonalizada(int id_personalizada, String nombrePropietario, Integer identificacion, String telefono, String sexo, Date fechaNacimiento, double saldo, Integer numeroTarjeta, Date fechaCreacion, Date ultimoUso) {
-        super(saldo, numeroTarjeta, fechaCreacion, ultimoUso);
-        this.id_personalizada = id_personalizada;
-        this.nombrePropietario = nombrePropietario;
-        this.identificacion = identificacion;
-        this.telefono = telefono;
-        this.sexo = sexo;
-        this.fechaNacimiento = fechaNacimiento;
+        this.fechaCreacion = fechaCreacion;
+        this.ultimoUso = ultimoUso;
     }
 
     public int getId_personalizada() {
@@ -95,14 +88,6 @@ public final class TarjetaPersonalizada extends TuLlave implements Serializable 
         this.sexo = sexo;
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
     public double getSaldo() {
         return saldo;
     }
@@ -117,6 +102,14 @@ public final class TarjetaPersonalizada extends TuLlave implements Serializable 
 
     public void setNumeroTarjeta(Integer numeroTarjeta) {
         this.numeroTarjeta = numeroTarjeta;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public Date getFechaCreacion() {
@@ -134,13 +127,7 @@ public final class TarjetaPersonalizada extends TuLlave implements Serializable 
     public void setUltimoUso(Date ultimoUso) {
         this.ultimoUso = ultimoUso;
     }
-    
-    
-    
-    
-    
 
-   
     public boolean prestarPasaje() {
         return true;
     }

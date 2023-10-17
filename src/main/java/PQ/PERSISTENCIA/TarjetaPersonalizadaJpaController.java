@@ -25,12 +25,11 @@ public class TarjetaPersonalizadaJpaController implements Serializable {
     public TarjetaPersonalizadaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    public TarjetaPersonalizadaJpaController(){
-        
+
+    public TarjetaPersonalizadaJpaController() {
         emf = Persistence.createEntityManagerFactory("TransmilenioPU");
+
     }
-    
-    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
@@ -140,5 +139,5 @@ public class TarjetaPersonalizadaJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

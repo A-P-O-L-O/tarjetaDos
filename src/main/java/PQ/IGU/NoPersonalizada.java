@@ -19,10 +19,9 @@ import lombok.ToString;
  */
 @ToString
 public class NoPersonalizada extends javax.swing.JFrame {
-    
+
     ControladoraLogica control = new ControladoraLogica();
-    
-    
+
     TarjetaPersonalizada tarjetaPersonalizada = new TarjetaPersonalizada();
     List<TarjetaPersonalizada> listaPersonalizada = new ArrayList<>();
     List<TuLlave> listaTullave = new ArrayList<>();
@@ -31,7 +30,7 @@ public class NoPersonalizada extends javax.swing.JFrame {
      * Creates new form Personalizada
      */
     public NoPersonalizada() {
-        
+
         //control= new ControladoraLogica();
         initComponents();
         Recarga recarga = new Recarga();
@@ -67,7 +66,7 @@ public class NoPersonalizada extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Tarjeta Personalizada");
+        jLabel1.setText("Tarjeta No Personalizada");
 
         jLabel2.setText("Identificación:");
 
@@ -234,9 +233,7 @@ public class NoPersonalizada extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          
-        
-        
+
         //OBTENGO LOS VALORES DE LA INTERFAZ PARA LA TARJETA PERSONALIZADA
         String nombre = txtNombre.getText();
         String identiString = txtIdentificacion.getText();
@@ -244,18 +241,10 @@ public class NoPersonalizada extends javax.swing.JFrame {
         Date fechaNacimiento = dcFechaNacimiento.getDate();
         String sexo = (String) cmbSexo.getSelectedItem();
         Integer identiInteger = Integer.valueOf(identiString);
-        
+
         //ESTO ES PARA LA FECHA DE CREACION
         Calendar calendario = Calendar.getInstance();
         Date fecha = calendario.getTime();
-        
-        
-        //OBTENGO LOS DATOS PARA LA TULLAVE
-        
-        control.guardarNopersonalizada(nombre,telefono,fechaNacimiento,sexo,identiInteger,fecha);
-        
-        //ESTA PARTE ESTA BASADA EN EL CURSO DE TODOCODE
-        
 
         //VALIDO QUE NO VENGAN EN BLANCO
         if (nombre.isEmpty() || identiString.isEmpty() || telefono.isEmpty() || fechaNacimiento == null || sexo.equals("~")) {
@@ -263,13 +252,14 @@ public class NoPersonalizada extends javax.swing.JFrame {
                     "Error Al Crear",
                     JOptionPane.WARNING_MESSAGE);
         } else {
-            
+            control.guardar(nombre, telefono, fechaNacimiento, sexo, identiInteger, fecha);
+
             JOptionPane option = new JOptionPane("Se Ha Creado Correctamente la Tarjeta ");
             option.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-            JDialog dialog= option.createDialog("Creacion Exitosa");
+            JDialog dialog = option.createDialog("Creacion Exitosa");
             dialog.setAlwaysOnTop(true);
             dialog.setVisible(true);
-            
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
