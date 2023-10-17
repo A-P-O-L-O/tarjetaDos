@@ -176,11 +176,9 @@ public class Recarga extends javax.swing.JFrame {
             Integer documento = Integer.parseInt(txtDocumento.getText());
             Integer recarga = Integer.parseInt(txtRecarga.getText());
             
-            ///control.recargar(documento,recarga);
+            control.recargar(documento, recarga);
 
         }
-
-
     }//GEN-LAST:event_btnRecargarActionPerformed
 
     private void btnMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu1ActionPerformed

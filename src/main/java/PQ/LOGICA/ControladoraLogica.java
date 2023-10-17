@@ -1,7 +1,9 @@
 package PQ.LOGICA;
 
 import PQ.PERSISTENCIA.ControladoraPersistencia;
+import PQ.PERSISTENCIA.TarjetaPersonalizadaJpaController;
 import java.util.Date;
+import java.util.List;
 
 public class ControladoraLogica {
 
@@ -45,4 +47,19 @@ public class ControladoraLogica {
 
     }
 
+    public void recargar(Integer documento, Integer recarga) {
+        
+        TarjetaPersonalizadaJpaController tarjetaController = new TarjetaPersonalizadaJpaController();
+        List<TarjetaPersonalizada> todasLasTarjetas = tarjetaController.getTodasLasTarjetas();
+        
+        for (TarjetaPersonalizada tarjeta : todasLasTarjetas) {
+            if (tarjeta.getNumeroTarjeta().equals(documento)) {
+                
+                System.out.println("siuuuu");
+                
+            }
+            
+           
+        }
+    }
 }
