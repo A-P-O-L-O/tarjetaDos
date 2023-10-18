@@ -10,16 +10,10 @@ public class ControladoraLogica {
     ControladoraPersistencia controlPersistencia = new ControladoraPersistencia();
 
     public void guardar(String nombre, String telefono, Date fechaNacimiento, String sexo, Integer identificacion, Date fecha) {
-        //VUELVO A VALIDAR QUE NO VENGAN VACIOS
-        if (nombre == null || nombre.isEmpty() || fechaNacimiento == null || sexo == null || identificacion == null || fecha == null) {
-
-            throw new IllegalArgumentException("Datos de entrada inválidos.");
-        }
 
         TarjetaPersonalizada tarjetaPersonalizada = new TarjetaPersonalizada();
-        TarjetaNoPersonalizada tarjetaNoPersonalizada = new TarjetaNoPersonalizada();
 
-        // Configurar los valores de TarjetaPersonalizada
+        // SETEO VALORES A LA PERSONALIZADA
         tarjetaPersonalizada.setNombrePropietario(nombre);
         tarjetaPersonalizada.setIdentificacion(identificacion);
         tarjetaPersonalizada.setTelefono(telefono);
@@ -29,6 +23,15 @@ public class ControladoraLogica {
         tarjetaPersonalizada.setSaldo(0);
         tarjetaPersonalizada.setNumeroTarjeta(identificacion);
         tarjetaPersonalizada.setUltimoUso(null);
+
+        // GUARDO LOS OBJETOS EN LA PERSISTENCIA
+        controlPersistencia.guardar(tarjetaPersonalizada);
+
+    }
+
+    public void guardarNoPersonalizada(String nombre, String telefono, Date fechaNacimiento, String sexo, Integer identificacion, Date fecha) {
+
+        TarjetaNoPersonalizada tarjetaNoPersonalizada = new TarjetaNoPersonalizada();
 
         //SETEO DE LOS VALORES LA TARJETA NO PERSONALIZADA :)
         tarjetaNoPersonalizada.setNombrePropietario(nombre);
@@ -41,25 +44,12 @@ public class ControladoraLogica {
         tarjetaNoPersonalizada.setNumeroTarjeta(identificacion);
         tarjetaNoPersonalizada.setUltimoUso(null);
 
-        // GUARDO LOS OBJETOS EN LA PERSISTENCIA
-        controlPersistencia.guardar(tarjetaPersonalizada);
-        controlPersistencia.guardar(tarjetaNoPersonalizada);
+        controlPersistencia.guardarNoPersonalizada(tarjetaNoPersonalizada);
 
     }
 
-    public void recargar(Integer documento, Integer recarga) {
-        
-        TarjetaPersonalizadaJpaController tarjetaController = new TarjetaPersonalizadaJpaController();
-        List<TarjetaPersonalizada> todasLasTarjetas = tarjetaController.getTodasLasTarjetas();
-        
-        for (TarjetaPersonalizada tarjeta : todasLasTarjetas) {
-            if (tarjeta.getNumeroTarjeta().equals(documento)) {
-                
-                System.out.println("siuuuu");
-                
-            }
-            
-           
-        }
+    public void actualizar(TarjetaPersonalizada tarjeta) throws Exception {
+        controlPersistencia.actualizar(tarjeta);
     }
+
 }

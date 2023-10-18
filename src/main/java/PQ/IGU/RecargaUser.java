@@ -16,14 +16,14 @@ import javax.swing.JOptionPane;
  *
  * @author Elias Jaramillo
  */
-public class Recarga extends javax.swing.JFrame {
+public class RecargaUser extends javax.swing.JFrame {
 
     ControladoraLogica control = new ControladoraLogica();
 
     /**
      * Creates new form Recarga
      */
-    public Recarga() {
+    public RecargaUser() {
         initComponents();
     }
 
@@ -216,7 +216,7 @@ public class Recarga extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRecargarActionPerformed
 
     private void btnMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu1ActionPerformed
-        Gestion gestion = new Gestion();
+        UserGestion gestion = new UserGestion();
         gestion.setVisible(true);
         gestion.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnMenu1ActionPerformed

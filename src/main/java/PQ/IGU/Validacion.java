@@ -91,7 +91,9 @@ public class Validacion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        Usuario usuario = new Usuario();
+        usuario.setVisible(true);
+        usuario.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton3ActionPerformed
 
   

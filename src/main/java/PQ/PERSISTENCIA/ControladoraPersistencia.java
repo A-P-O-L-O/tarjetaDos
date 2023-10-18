@@ -13,8 +13,15 @@ public class ControladoraPersistencia {
         personalizada.create(tarjetaPersonalizada);
     }
 
-    public void guardar(TarjetaNoPersonalizada tarjetaNoPersonalizada) {
+    public void guardarNoPersonalizada(TarjetaNoPersonalizada tarjetaNoPersonalizada) {
+        //CREO EN LA BASE DE DATOS LA TARJETA NO PERSONALIZADA 
         noPersonalizada.create(tarjetaNoPersonalizada);
+
+    }
+
+    public void actualizar(TarjetaPersonalizada tarjeta) throws Exception {
+        
+        personalizada.edit(tarjeta);
     }
 
 }

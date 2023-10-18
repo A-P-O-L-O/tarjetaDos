@@ -252,7 +252,7 @@ public class NoPersonalizada extends javax.swing.JFrame {
                     "Error Al Crear",
                     JOptionPane.WARNING_MESSAGE);
         } else {
-            control.guardar(nombre, telefono, fechaNacimiento, sexo, identiInteger, fecha);
+            control.guardarNoPersonalizada(nombre,telefono,fechaNacimiento,sexo,identiInteger,fecha);
 
             JOptionPane option = new JOptionPane("Se Ha Creado Correctamente la Tarjeta ");
             option.setMessageType(JOptionPane.INFORMATION_MESSAGE);
