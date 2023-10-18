@@ -187,7 +187,7 @@ public class Recarga extends javax.swing.JFrame {
 
         } else {
 
-            Integer documento = Integer.parseInt(txtDocumento.getText());
+            Integer documento = Integer.valueOf(txtDocumento.getText());
             double recarga = Double.parseDouble(txtRecarga.getText());
 
             TarjetaPersonalizadaJpaController tarjetaController = new TarjetaPersonalizadaJpaController();
@@ -207,6 +207,8 @@ public class Recarga extends javax.swing.JFrame {
                     try {
                         control.actualizar(tarjeta);
                     } catch (Exception ex) {
+                        
+                        System.out.println("NO SE PUDO LLEVAR ACABO ESTO BROOO :(");
                         
                     }
                 }

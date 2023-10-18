@@ -52,4 +52,9 @@ public class ControladoraLogica {
         controlPersistencia.actualizar(tarjeta);
     }
 
+    public void pagar(TarjetaPersonalizada tarjeta) throws Exception {
+        
+        controlPersistencia.pagar(tarjeta);
+    }
+
 }
