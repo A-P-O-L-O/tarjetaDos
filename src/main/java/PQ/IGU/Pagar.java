@@ -202,19 +202,29 @@ public class Pagar extends javax.swing.JFrame {
 
                     } else {
 
-                        double descuento = tarjeta.getSaldo() - 2950;
+                        double validacion = -3000.0;
 
-                        tarjeta.setSaldo(descuento);
+                        if (tarjeta.getSaldo() >= prestamo && tarjeta.getSaldo() >= validacion) {
+                            double descuento = tarjeta.getSaldo() - 2950;
 
-                        Date dateFecha = fechaActual.getTime();
+                            tarjeta.setSaldo(descuento);
 
-                        tarjeta.setUltimoUso(dateFecha);
+                            Date dateFecha = fechaActual.getTime();
 
-                        JOptionPane option = new JOptionPane("Bienvenido al Sistema");
-                        option.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-                        JDialog dialog = option.createDialog("Accseo exitoso");
-                        dialog.setAlwaysOnTop(true);
-                        dialog.setVisible(true);
+                            tarjeta.setUltimoUso(dateFecha);
+
+                            JOptionPane option = new JOptionPane("Bienvenido al Sistema");
+                            option.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+                            JDialog dialog = option.createDialog("Accseo exitoso");
+                            dialog.setAlwaysOnTop(true);
+                            dialog.setVisible(true);
+
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Recarga tu Tarjeta",
+                                    "Error Al ingresar",
+                                    JOptionPane.WARNING_MESSAGE);
+
+                        }
 
                         try {
                             control.pagar(tarjeta);
@@ -228,50 +238,8 @@ public class Pagar extends javax.swing.JFrame {
             }
         }
 
+
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Pagar.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Pagar.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Pagar.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Pagar.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Pagar().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
