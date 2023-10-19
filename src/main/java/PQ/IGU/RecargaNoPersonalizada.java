@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  * @author Elias Jaramillo
  */
 public class RecargaNoPersonalizada extends javax.swing.JFrame {
-
+    
     ControladoraLogica control = new ControladoraLogica();
 
     /**
@@ -181,31 +181,31 @@ public class RecargaNoPersonalizada extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRecargaActionPerformed
 
     private void btnRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargarActionPerformed
-
+        
         if (txtDocumento.getText().isEmpty() || txtRecarga.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "El Campo Del Documento O El Campo de la Recarga Esta Vacio ",
                     "Error Al Recargar",
                     JOptionPane.WARNING_MESSAGE);
-
+            
         } else {
-
+            
             Integer documento = Integer.valueOf(txtDocumento.getText());
             double recarga = Double.parseDouble(txtRecarga.getText());
-
+            
             TarjetaNoPersonalizadaJpaController tarjetaController = new TarjetaNoPersonalizadaJpaController();
             List<TarjetaNoPersonalizada> todasLasTarjetas = tarjetaController.getTodasLasTarjetas();
-
+            
             for (TarjetaNoPersonalizada tarjeta : todasLasTarjetas) {
                 if (tarjeta.getNumeroTarjeta().equals(documento)) {
-
+                    
                     String saldo = String.valueOf(tarjeta.getSaldo());
-
+                    
                     double finalSaldo = Double.parseDouble(saldo) + recarga;
-
+                    
                     lbSaldo.setText(String.valueOf(finalSaldo));
-
+                    
                     tarjeta.setSaldo(finalSaldo);
-
+                    
                     try {
                         control.actualizarNoPersonalizada(tarjeta);
                     } catch (Exception ex) {
@@ -215,14 +215,17 @@ public class RecargaNoPersonalizada extends javax.swing.JFrame {
                     }
                 }
             }
-
+            
         }
     }//GEN-LAST:event_btnRecargarActionPerformed
 
     private void btnMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu1ActionPerformed
-        Gestion gestion = new Gestion();
-        gestion.setVisible(true);
-        gestion.setLocationRelativeTo(null);
+        
+        TipoTarjeta tipoTarjeta = new TipoTarjeta();
+        tipoTarjeta.setVisible(true);
+        tipoTarjeta.setLocationRelativeTo(null);
+        
+
     }//GEN-LAST:event_btnMenu1ActionPerformed
 
     private void txtDocumentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDocumentoFocusLost

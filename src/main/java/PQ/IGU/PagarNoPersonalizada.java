@@ -134,7 +134,7 @@ public class PagarNoPersonalizada extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDocumentoUnoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        RecargaUser userRecarga = new RecargaUser();
+        RecargaNoPersonalizada userRecarga = new RecargaNoPersonalizada();
         userRecarga.setVisible(true);
         userRecarga.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -150,40 +150,49 @@ public class PagarNoPersonalizada extends javax.swing.JFrame {
             List<TarjetaNoPersonalizada> listaNoPersonalizadas = controller.getTodasLasTarjetas();
             Integer documento = Integer.parseInt(txtDocumentoUno.getText());
 
+            // Agrega una variable para rastrear si el usuario puede acceder al sistema
+            boolean puedeAcceder = false;
+
             for (TarjetaNoPersonalizada tarjeta : listaNoPersonalizadas) {
                 if (tarjeta.getNumeroTarjeta().equals(documento)) {
-
-                    // DEBO SABER LA FECHA ACTUAL
-                    Calendar fechaActual = Calendar.getInstance();
-                    Date dateFecha = fechaActual.getTime();
-
-                    System.out.println("Usuario sí está en el sistema");
-
-                    double descuento = tarjeta.getSaldo() - 2950;
-
-                    tarjeta.setSaldo(descuento);
-                    tarjeta.setUltimoUso(dateFecha);
-
-                    JOptionPane option = new JOptionPane("Bienvenido al Sistema");
-                    option.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-                    JDialog dialog = option.createDialog("Accseo exitoso");
-                    dialog.setAlwaysOnTop(true);
-                    dialog.setVisible(true);
-
                     if (tarjeta.getSaldo() < 2950) {
-                        JOptionPane.showMessageDialog(this, "Recarga tu Tarjeta",
-                                "Error Al ingresar",
-                                JOptionPane.WARNING_MESSAGE);
-                    }
+                        
+                        System.out.println("no puede acceder");
+                    } else {
+                        // DEBO SABER LA FECHA ACTUAL
+                        Calendar fechaActual = Calendar.getInstance();
+                        Date dateFecha = fechaActual.getTime();
 
-                    try {
-                        control.pagarNoPersonalizada(tarjeta);
-                    } catch (Exception ex) {
-                        Logger.getLogger(PagarNoPersonalizada.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                        System.out.println("Usuario sí está en el sistema");
 
+                        double descuento = tarjeta.getSaldo() - 2950;
+
+                        tarjeta.setSaldo(descuento);
+                        tarjeta.setUltimoUso(dateFecha);
+
+                        JOptionPane option = new JOptionPane("Bienvenido al Sistema");
+                        option.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+                        JDialog dialog = option.createDialog("Accseo exitoso");
+                        dialog.setAlwaysOnTop(true);
+                        dialog.setVisible(true);
+
+                        try {
+                            control.pagarNoPersonalizada(tarjeta);
+                        } catch (Exception ex) {
+                            Logger.getLogger(PagarNoPersonalizada.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                        // El usuario puede acceder al sistema
+                        puedeAcceder = true;
+                    }
                 }
+            }
 
+            // Verifica si el usuario puede acceder al sistema
+            if (!puedeAcceder) {
+                JOptionPane.showMessageDialog(this, "Usuario no válido o saldo insuficiente",
+                        "Error Al ingresar",
+                        JOptionPane.WARNING_MESSAGE);
             }
         }
 
