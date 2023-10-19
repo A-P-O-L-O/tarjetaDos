@@ -57,4 +57,12 @@ public class ControladoraLogica {
         controlPersistencia.pagar(tarjeta);
     }
 
+    public void actualizarNoPersonalizada(TarjetaNoPersonalizada tarjeta)throws Exception{
+        controlPersistencia.actualizarNoPersonalizada(tarjeta);
+    }
+
+    public void pagarNoPersonalizada(TarjetaNoPersonalizada tarjeta) throws Exception {
+        controlPersistencia.pagarNoPersonalizada(tarjeta);
+    }
+
 }

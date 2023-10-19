@@ -74,10 +74,11 @@ public class Validacion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Pagar pagar = new Pagar();
-        pagar.setVisible(true);
-        pagar.setLocationRelativeTo(null);
 
+        TipoTarjeta tipoTarjeta = new TipoTarjeta();
+        tipoTarjeta.setVisible(true);
+        tipoTarjeta.setLocationRelativeTo(null);
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

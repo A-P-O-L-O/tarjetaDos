@@ -29,4 +29,12 @@ public class ControladoraPersistencia {
         personalizada.edit(tarjeta);
     }
 
+    public void actualizarNoPersonalizada(TarjetaNoPersonalizada tarjeta) throws Exception {
+        noPersonalizada.edit(tarjeta);
+    }
+
+    public void pagarNoPersonalizada(TarjetaNoPersonalizada tarjeta) throws Exception {
+        noPersonalizada.edit(tarjeta);
+    }
+
 }

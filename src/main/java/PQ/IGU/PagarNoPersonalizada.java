@@ -5,8 +5,8 @@
 package PQ.IGU;
 
 import PQ.LOGICA.ControladoraLogica;
-import PQ.LOGICA.TarjetaPersonalizada;
-import PQ.PERSISTENCIA.TarjetaPersonalizadaJpaController;
+import PQ.LOGICA.TarjetaNoPersonalizada;
+import PQ.PERSISTENCIA.TarjetaNoPersonalizadaJpaController;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -19,14 +19,14 @@ import javax.swing.JOptionPane;
  *
  * @author Elias Jaramillo
  */
-public class Pagar extends javax.swing.JFrame {
+public class PagarNoPersonalizada extends javax.swing.JFrame {
 
     ControladoraLogica control = new ControladoraLogica();
 
     /**
      * Creates new form Pagar
      */
-    public Pagar() {
+    public PagarNoPersonalizada() {
         initComponents();
     }
 
@@ -146,93 +146,44 @@ public class Pagar extends javax.swing.JFrame {
                     "Error Al Recargar",
                     JOptionPane.WARNING_MESSAGE);
         } else {
-            TarjetaPersonalizadaJpaController controller = new TarjetaPersonalizadaJpaController();
-            List<TarjetaPersonalizada> listaPersonalizadas = controller.getTodasLasTarjetas();
+            TarjetaNoPersonalizadaJpaController controller = new TarjetaNoPersonalizadaJpaController();
+            List<TarjetaNoPersonalizada> listaNoPersonalizadas = controller.getTodasLasTarjetas();
             Integer documento = Integer.parseInt(txtDocumentoUno.getText());
-            double prestamo = -5900.0;
 
-            int edad = 0; // INICIALIZO LA VARIABLE CON UN VALOR PREDETERMINDO
-
-            for (TarjetaPersonalizada tarjeta : listaPersonalizadas) {
+            for (TarjetaNoPersonalizada tarjeta : listaNoPersonalizadas) {
                 if (tarjeta.getNumeroTarjeta().equals(documento)) {
-
-                    //ESTO ES PARA LAS FECHAS
-                    Date fechaNacimiento = tarjeta.getFechaNacimiento();
-                    Calendar fechaNacimientoCalendar = Calendar.getInstance();
-                    fechaNacimientoCalendar.setTime(fechaNacimiento);
 
                     // DEBO SABER LA FECHA ACTUAL
                     Calendar fechaActual = Calendar.getInstance();
-
-                    // CALCULO LA EDAD DEL DUEÑO DE LA TARJETA
-                    edad = fechaActual.get(Calendar.YEAR) - fechaNacimientoCalendar.get(Calendar.YEAR);
+                    Date dateFecha = fechaActual.getTime();
 
                     System.out.println("Usuario sí está en el sistema");
-                    if (tarjeta.getSexo().equals("FEMENINO") && edad >= 57 || (tarjeta.getSexo().equals("MASCULINO") && edad >= 62)) {
 
-                        double descuento = (2950 - 590);
+                    double descuento = tarjeta.getSaldo() - 2950;
 
-                        double finalSaldo = tarjeta.getSaldo() - descuento;
+                    tarjeta.setSaldo(descuento);
+                    tarjeta.setUltimoUso(dateFecha);
 
-                        tarjeta.setSaldo(finalSaldo);
+                    JOptionPane option = new JOptionPane("Bienvenido al Sistema");
+                    option.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+                    JDialog dialog = option.createDialog("Accseo exitoso");
+                    dialog.setAlwaysOnTop(true);
+                    dialog.setVisible(true);
 
-                        Date dateFecha = fechaActual.getTime();
-
-                        tarjeta.setUltimoUso(dateFecha);
-
-                        JOptionPane option = new JOptionPane("Bienvenido al Sistema");
-                        option.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-                        JDialog dialog = option.createDialog("Accseo exitoso");
-                        dialog.setAlwaysOnTop(true);
-                        dialog.setVisible(true);
-
-                        try {
-                            control.pagar(tarjeta);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Pagar.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
-                    } else if (tarjeta.getSaldo() <= prestamo) {
-
+                    if (tarjeta.getSaldo() < 2950) {
                         JOptionPane.showMessageDialog(this, "Recarga tu Tarjeta",
                                 "Error Al ingresar",
                                 JOptionPane.WARNING_MESSAGE);
+                    }
 
-                    } else {
-
-                        double validacion = -3000.0;
-
-                        if (tarjeta.getSaldo() >= prestamo && tarjeta.getSaldo() >= validacion) {
-                            double descuento = tarjeta.getSaldo() - 2950;
-
-                            tarjeta.setSaldo(descuento);
-
-                            Date dateFecha = fechaActual.getTime();
-
-                            tarjeta.setUltimoUso(dateFecha);
-
-                            JOptionPane option = new JOptionPane("Bienvenido al Sistema");
-                            option.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-                            JDialog dialog = option.createDialog("Accseo exitoso");
-                            dialog.setAlwaysOnTop(true);
-                            dialog.setVisible(true);
-
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Recarga tu Tarjeta",
-                                    "Error Al ingresar",
-                                    JOptionPane.WARNING_MESSAGE);
-
-                        }
-
-                        try {
-                            control.pagar(tarjeta);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Pagar.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
+                    try {
+                        control.pagarNoPersonalizada(tarjeta);
+                    } catch (Exception ex) {
+                        Logger.getLogger(PagarNoPersonalizada.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                 }
+
             }
         }
 

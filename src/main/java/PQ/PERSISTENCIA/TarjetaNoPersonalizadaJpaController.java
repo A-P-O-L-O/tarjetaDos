@@ -5,6 +5,7 @@
 package PQ.PERSISTENCIA;
 
 import PQ.LOGICA.TarjetaNoPersonalizada;
+import PQ.LOGICA.TarjetaPersonalizada;
 import PQ.PERSISTENCIA.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -141,4 +143,15 @@ public class TarjetaNoPersonalizadaJpaController implements Serializable {
         }
     }
 
+    public List<TarjetaNoPersonalizada> getTodasLasTarjetas() {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<TarjetaNoPersonalizada> query = em.createQuery("SELECT t FROM TarjetaNoPersonalizada t", TarjetaNoPersonalizada.class);
+            List<TarjetaNoPersonalizada> tarjetas = query.getResultList();
+            return tarjetas;
+        } finally {
+            em.close();
+        }
+
+    }
 }
