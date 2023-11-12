@@ -2,39 +2,57 @@ package PQ.PERSISTENCIA;
 
 import PQ.LOGICA.TarjetaNoPersonalizada;
 import PQ.LOGICA.TarjetaPersonalizada;
+import java.util.List;
 
 public class ControladoraPersistencia {
 
-    TarjetaPersonalizadaJpaController personalizada = new TarjetaPersonalizadaJpaController();
-    TarjetaNoPersonalizadaJpaController noPersonalizada = new TarjetaNoPersonalizadaJpaController();
+    TarjetaPersonalizadaJpaController personalizadaJPA = new TarjetaPersonalizadaJpaController();
+    TarjetaNoPersonalizadaJpaController noPersonalizadaJPA = new TarjetaNoPersonalizadaJpaController();
 
+    // <------------->METODO PARA CREAR LAS TARJETAS<------------->
     public void guardar(TarjetaPersonalizada tarjetaPersonalizada) {
         //CREAR EN LA BASE DE DATOS LA TARJETAPERSONALIZADA
-        personalizada.create(tarjetaPersonalizada);
+        personalizadaJPA.create(tarjetaPersonalizada);
     }
 
-    public void guardarNoPersonalizada(TarjetaNoPersonalizada tarjetaNoPersonalizada) {
-        //CREO EN LA BASE DE DATOS LA TARJETA NO PERSONALIZADA 
-        noPersonalizada.create(tarjetaNoPersonalizada);
-
+    public void guardarNoPersonalizada(TarjetaNoPersonalizada nopersonalizada) {
+        noPersonalizadaJPA.create(nopersonalizada);
     }
 
-    public void actualizar(TarjetaPersonalizada tarjeta) throws Exception {
-        
-        personalizada.edit(tarjeta);
+    // <------------->METODOS DE RECARGA<------------->
+    public void recargarPersonalizada(TarjetaPersonalizada tarjeta) throws Exception {
+        personalizadaJPA.edit(tarjeta);
+    }
+
+    public void recargarNoPersonalizada(TarjetaNoPersonalizada tarjeta) throws Exception {
+        noPersonalizadaJPA.edit(tarjeta);
+    }
+
+    // <------------->METODOS DE PAGAR<------------->
+    public void pagarNoPersonalizada(TarjetaNoPersonalizada tarjeta) throws Exception {
+        noPersonalizadaJPA.edit(tarjeta);
     }
 
     public void pagar(TarjetaPersonalizada tarjeta) throws Exception {
-        
-        personalizada.edit(tarjeta);
+        personalizadaJPA.edit(tarjeta);
     }
 
-    public void actualizarNoPersonalizada(TarjetaNoPersonalizada tarjeta) throws Exception {
-        noPersonalizada.edit(tarjeta);
+    //<--------------------------->Traer los datos a la tabla para las personalizadas <-------------------------------->
+    public List<TarjetaPersonalizada> traerTarjetas() {
+        return personalizadaJPA.findTarjetaPersonalizadaEntities();
     }
 
-    public void pagarNoPersonalizada(TarjetaNoPersonalizada tarjeta) throws Exception {
-        noPersonalizada.edit(tarjeta);
+    public void bloquearOActivar(TarjetaPersonalizada tarjeta) throws Exception {
+        personalizadaJPA.edit(tarjeta);
+    }
+
+    //<--------------------------->Traer los datos a la tabala para las no personalizadas <-------------------------------->
+    public List<TarjetaNoPersonalizada> traerNoPersonalizadas() {
+        return noPersonalizadaJPA.findTarjetaNoPersonalizadaEntities();
+    }
+
+    public void bloquearOActivarNoPersonalizada(TarjetaNoPersonalizada tarjeta) throws Exception {
+        noPersonalizadaJPA.edit(tarjeta);
     }
 
 }

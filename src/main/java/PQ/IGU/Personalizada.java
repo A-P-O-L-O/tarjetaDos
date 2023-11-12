@@ -1,37 +1,20 @@
 package PQ.IGU;
 
 import PQ.LOGICA.ControladoraLogica;
-import PQ.LOGICA.TarjetaPersonalizada;
-import PQ.LOGICA.TuLlave;
-import java.awt.Dialog;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Random;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import lombok.ToString;
 
-/**
- *
- * @author Elias Jaramillo
- */
-@ToString
+
+
 public class Personalizada extends javax.swing.JFrame {
-    
+
     ControladoraLogica control = new ControladoraLogica();
-    
-    
-    TarjetaPersonalizada tarjetaPersonalizada = new TarjetaPersonalizada();
-    List<TarjetaPersonalizada> listaPersonalizada = new ArrayList<>();
-    List<TuLlave> listaTullave = new ArrayList<>();
 
     /**
      * Creates new form Personalizada
      */
     public Personalizada() {
-        
+
         //control= new ControladoraLogica();
         initComponents();
         Recarga recarga = new Recarga();
@@ -63,11 +46,11 @@ public class Personalizada extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Tarjeta Personalizada");
+        jLabel1.setText("Creacion Tarjeta Personalizada");
 
         jLabel2.setText("Identificación:");
 
@@ -85,13 +68,28 @@ public class Personalizada extends javax.swing.JFrame {
                 txtNombreActionPerformed(evt);
             }
         });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         txtTelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
 
         txtIdentificacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtIdentificacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdentificacionActionPerformed(evt);
+            }
+        });
+        txtIdentificacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdentificacionKeyTyped(evt);
             }
         });
 
@@ -234,36 +232,31 @@ public class Personalizada extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          
-        
-        //OBTENGO LOS VALORES DE LA INTERFAZ PARA LA TARJETA PERSONALIZADA
-        String nombre = txtNombre.getText();
-        String identiString = txtIdentificacion.getText();
-        String telefono = txtTelefono.getText();
-        Date fechaNacimiento = dcFechaNacimiento.getDate();
-        String sexo = (String) cmbSexo.getSelectedItem();
-        Integer identiInteger = Integer.valueOf(identiString);
-        
-        //ESTO ES PARA LA FECHA DE CREACION
-        Calendar calendario = Calendar.getInstance();
-        Date fecha = calendario.getTime();
-        
+
         //VALIDO QUE NO VENGAN EN BLANCO
-        if (nombre.isEmpty() || identiString.isEmpty() || telefono.isEmpty() || fechaNacimiento == null || sexo.equals("~")) {
-            JOptionPane.showMessageDialog(this, "No Puede Haber Ningún Campo Vacío! ",
+        if (txtNombre.getText().isEmpty() || txtIdentificacion.getText().isEmpty() || txtTelefono.getText().isEmpty() || dcFechaNacimiento == null || cmbSexo.getSelectedItem().equals("~")) {
+            JOptionPane.showMessageDialog(this, "No puede haber ningún campo vacío o opción no válida.",
                     "Error Al Crear",
                     JOptionPane.WARNING_MESSAGE);
         } else {
-            
-            control.guardar(nombre,telefono,fechaNacimiento,sexo,identiInteger,fecha);
-            
-            JOptionPane option = new JOptionPane("Se Ha Creado Correctamente la Tarjeta ");
-            option.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-            JDialog dialog= option.createDialog("Creacion Exitosa");
-            dialog.setAlwaysOnTop(true);
-            dialog.setVisible(true);
-            
+
+            //OBTENGO LOS VALORES DE LA INTERFAZ PARA LA TARJETA PERSONALIZADA
+            String nombre = txtNombre.getText().trim();
+            String identiString = txtIdentificacion.getText().trim();
+            String telefono = txtTelefono.getText().trim();
+            Date fechaNacimiento = dcFechaNacimiento.getDate();
+            String sexo = (String) cmbSexo.getSelectedItem();
+            Integer identiInteger = Integer.valueOf(identiString.trim());
+
+            control.guardar(nombre, telefono, fechaNacimiento, sexo, identiInteger);
+
         }
+
+        txtIdentificacion.setText(" ");
+        txtNombre.setText(" ");
+        txtTelefono.setText(" ");
+        cmbSexo.setSelectedIndex(0);
+        dcFechaNacimiento.setDate(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -279,6 +272,56 @@ public class Personalizada extends javax.swing.JFrame {
         validacion.setVisible(true);
         validacion.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+
+        int key = evt.getKeyChar();
+
+        if (Character.isDigit(key) && txtTelefono.getText().trim().length() < 10) {
+            // INGRESO DE SOLO DIGITOS Y QUE SEAN MENOR A 10
+
+        } else if (key == 8) {
+            // PERMITO TAMBIEN QUE PUEDA BORRAR NUMEROS
+        } else {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Este campo solo acepta números y tiene un máximo de 10 dígitos.",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+
+        char key = evt.getKeyChar();
+
+        if ((Character.isLetter(key) || key == ' ') && txtNombre.getText().trim().length() < 255) {
+            // PERMITE EL INGRESO DE SOLO LETRAS Y MAXIMO255 CARACTERES
+        } else if (key == 8) {
+            // PERMITE UTILIZAR EL BOTON BORRAR
+        } else {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Este campo solo acepta letras y espacios en blanco, y tiene un máximo de 255 caracteres.",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentificacionKeyTyped
+
+        int key = evt.getKeyChar();
+
+        if (Character.isDigit(key) && txtIdentificacion.getText().trim().length() < 15) {
+            // INGRESO DE SOLO DIGITOS Y QUE SEAN MENOR A 15 DIGITOS
+        } else if (key == 8) {
+            // PERMITO TAMBIEN QUE PUEDA BORRAR NUMEROS
+        } else {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Este campo solo acepta números y tiene un máximo de 15 dígitos.",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtIdentificacionKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbSexo;

@@ -1,33 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package PQ.IGU;
 
 import PQ.LOGICA.ControladoraLogica;
-import PQ.LOGICA.TarjetaNoPersonalizada;
-import PQ.LOGICA.controladoraLogicaNoPersonalizadas;
-import PQ.PERSISTENCIA.TarjetaNoPersonalizadaJpaController;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Elias Jaramillo
- */
-public class PagarNoPersonalizada extends javax.swing.JFrame {
+public class ZonalPagar extends javax.swing.JFrame {
 
-    controladoraLogicaNoPersonalizadas control = new controladoraLogicaNoPersonalizadas();
+    ControladoraLogica control = new ControladoraLogica();
 
     /**
      * Creates new form Pagar
      */
-    public PagarNoPersonalizada() {
+    public ZonalPagar() {
         initComponents();
     }
 
@@ -51,7 +36,7 @@ public class PagarNoPersonalizada extends javax.swing.JFrame {
 
         jLabel1.setText("Pagar");
 
-        jLabel2.setText("ingresa tu numero de Tarjeta");
+        jLabel2.setText("ingresa tu numero de documenro");
 
         txtDocumentoUno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,7 +125,7 @@ public class PagarNoPersonalizada extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDocumentoUnoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        RecargaUserNoPersonalizada userRecarga = new RecargaUserNoPersonalizada();
+        RecargaUser userRecarga = new RecargaUser();
         userRecarga.setVisible(true);
         userRecarga.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -152,23 +137,21 @@ public class PagarNoPersonalizada extends javax.swing.JFrame {
                     "Error Al Recargar",
                     JOptionPane.WARNING_MESSAGE);
         } else {
+            Integer numeroDocumento = Integer.valueOf(txtDocumentoUno.getText().trim());
 
-            Integer numeroTarjeta = Integer.valueOf(txtDocumentoUno.getText().trim());
             try {
-                control.pagarNoPersonalizada(numeroTarjeta);
+                control.zonal(numeroDocumento);
             } catch (Exception ex) {
-                Logger.getLogger(PagarNoPersonalizada.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ZonalPagar.class.getName()).log(Level.SEVERE, null, ex);
             }
-            txtDocumentoUno.setText(" ");
 
+            txtDocumentoUno.setText("");
         }
-
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtDocumentoUnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDocumentoUnoKeyTyped
-
-        int key = evt.getKeyChar();
+         int key = evt.getKeyChar();
 
         if (Character.isDigit(key) && txtDocumentoUno.getText().trim().length() < 15) {
             // INGRESO DE SOLO DIGITOS Y QUE SEAN MENOR A 15 DIGITOS
@@ -179,7 +162,6 @@ public class PagarNoPersonalizada extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Este campo solo acepta números y tiene un máximo de 15 dígitos.",
                     "Error", JOptionPane.WARNING_MESSAGE);
         }
-
 
     }//GEN-LAST:event_txtDocumentoUnoKeyTyped
 

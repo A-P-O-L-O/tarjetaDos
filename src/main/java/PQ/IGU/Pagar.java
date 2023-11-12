@@ -1,24 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package PQ.IGU;
 
 import PQ.LOGICA.ControladoraLogica;
-import PQ.LOGICA.TarjetaPersonalizada;
-import PQ.PERSISTENCIA.TarjetaPersonalizadaJpaController;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Elias Jaramillo
- */
 public class Pagar extends javax.swing.JFrame {
 
     ControladoraLogica control = new ControladoraLogica();
@@ -46,7 +32,7 @@ public class Pagar extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Pagar");
 
@@ -55,6 +41,11 @@ public class Pagar extends javax.swing.JFrame {
         txtDocumentoUno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDocumentoUnoActionPerformed(evt);
+            }
+        });
+        txtDocumentoUno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDocumentoUnoKeyTyped(evt);
             }
         });
 
@@ -146,98 +137,33 @@ public class Pagar extends javax.swing.JFrame {
                     "Error Al Recargar",
                     JOptionPane.WARNING_MESSAGE);
         } else {
-            TarjetaPersonalizadaJpaController controller = new TarjetaPersonalizadaJpaController();
-            List<TarjetaPersonalizada> listaPersonalizadas = controller.getTodasLasTarjetas();
-            Integer documento = Integer.parseInt(txtDocumentoUno.getText());
-            double prestamo = -5900.0;
+            Integer numeroDocumento = Integer.valueOf(txtDocumentoUno.getText().trim());
 
-            int edad = 0; // INICIALIZO LA VARIABLE CON UN VALOR PREDETERMINDO
-
-            for (TarjetaPersonalizada tarjeta : listaPersonalizadas) {
-                if (tarjeta.getNumeroTarjeta().equals(documento)) {
-
-                    //ESTO ES PARA LAS FECHAS
-                    Date fechaNacimiento = tarjeta.getFechaNacimiento();
-                    Calendar fechaNacimientoCalendar = Calendar.getInstance();
-                    fechaNacimientoCalendar.setTime(fechaNacimiento);
-
-                    // DEBO SABER LA FECHA ACTUAL
-                    Calendar fechaActual = Calendar.getInstance();
-
-                    // CALCULO LA EDAD DEL DUEÑO DE LA TARJETA
-                    edad = fechaActual.get(Calendar.YEAR) - fechaNacimientoCalendar.get(Calendar.YEAR);
-
-                    System.out.println("Usuario sí está en el sistema");
-                    if (tarjeta.getSexo().equals("FEMENINO") && edad >= 57 || (tarjeta.getSexo().equals("MASCULINO") && edad >= 62)) {
-
-                        double descuento = (2950 - 590);
-
-                        double finalSaldo = tarjeta.getSaldo() - descuento;
-
-                        tarjeta.setSaldo(finalSaldo);
-
-                        Date dateFecha = fechaActual.getTime();
-
-                        tarjeta.setUltimoUso(dateFecha);
-
-                        JOptionPane option = new JOptionPane("Bienvenido al Sistema");
-                        option.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-                        JDialog dialog = option.createDialog("Accseo exitoso");
-                        dialog.setAlwaysOnTop(true);
-                        dialog.setVisible(true);
-
-                        try {
-                            control.pagar(tarjeta);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Pagar.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
-                    } else if (tarjeta.getSaldo() <= prestamo) {
-
-                        JOptionPane.showMessageDialog(this, "Recarga tu Tarjeta",
-                                "Error Al ingresar",
-                                JOptionPane.WARNING_MESSAGE);
-
-                    } else {
-
-                        double validacion = -3000.0;
-
-                        if (tarjeta.getSaldo() >= prestamo && tarjeta.getSaldo() >= validacion) {
-                            double descuento = tarjeta.getSaldo() - 2950;
-
-                            tarjeta.setSaldo(descuento);
-
-                            Date dateFecha = fechaActual.getTime();
-
-                            tarjeta.setUltimoUso(dateFecha);
-
-                            JOptionPane option = new JOptionPane("Bienvenido al Sistema");
-                            option.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-                            JDialog dialog = option.createDialog("Accseo exitoso");
-                            dialog.setAlwaysOnTop(true);
-                            dialog.setVisible(true);
-
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Recarga tu Tarjeta",
-                                    "Error Al ingresar",
-                                    JOptionPane.WARNING_MESSAGE);
-
-                        }
-
-                        try {
-                            control.pagar(tarjeta);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Pagar.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
-                    }
-
-                }
+            try {
+                control.pagar(numeroDocumento);
+            } catch (Exception ex) {
+                Logger.getLogger(Pagar.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+            txtDocumentoUno.setText("");
         }
 
-
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtDocumentoUnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDocumentoUnoKeyTyped
+         int key = evt.getKeyChar();
+
+        if (Character.isDigit(key) && txtDocumentoUno.getText().trim().length() < 15) {
+            // INGRESO DE SOLO DIGITOS Y QUE SEAN MENOR A 15 DIGITOS
+        } else if (key == 8) {
+            // PERMITO TAMBIEN QUE PUEDA BORRAR NUMEROS
+        } else {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Este campo solo acepta números y tiene un máximo de 15 dígitos.",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+        }
+
+    }//GEN-LAST:event_txtDocumentoUnoKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -1,21 +1,24 @@
 package PQ.LOGICA;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.swing.JOptionPane;
 
 @Entity
 public final class TarjetaPersonalizada extends TuLlave implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id")
     private int id_personalizada;
 
     @Basic
@@ -31,11 +34,13 @@ public final class TarjetaPersonalizada extends TuLlave implements Serializable 
     private Date fechaCreacion;
     @Temporal(TemporalType.DATE)
     private Date ultimoUso;
+    private boolean estado;
+    private int pasajePrestado;
 
     public TarjetaPersonalizada() {
     }
 
-    public TarjetaPersonalizada(int id_personalizada, String nombrePropietario, Integer identificacion, String telefono, String sexo, double saldo, Integer numeroTarjeta, Date fechaNacimiento, Date fechaCreacion, Date ultimoUso) {
+    public TarjetaPersonalizada(int id_personalizada, String nombrePropietario, Integer identificacion, String telefono, String sexo, double saldo, Integer numeroTarjeta, Date fechaNacimiento, Date fechaCreacion, Date ultimoUso, boolean estado, Integer pasajePrestado) {
         this.id_personalizada = id_personalizada;
         this.nombrePropietario = nombrePropietario;
         this.identificacion = identificacion;
@@ -46,6 +51,24 @@ public final class TarjetaPersonalizada extends TuLlave implements Serializable 
         this.fechaNacimiento = fechaNacimiento;
         this.fechaCreacion = fechaCreacion;
         this.ultimoUso = ultimoUso;
+        this.estado = estado;
+        this.pasajePrestado = pasajePrestado;
+    }
+
+    public int getPasajePrestado() {
+        return pasajePrestado;
+    }
+
+    public void setPasajePrestado(int pasajePrestado) {
+        this.pasajePrestado = pasajePrestado;
+    }
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     public int getId_personalizada() {
@@ -129,13 +152,38 @@ public final class TarjetaPersonalizada extends TuLlave implements Serializable 
     }
 
     public boolean prestarPasaje() {
-        return true;
+        return pasajePrestado < 2;
     }
 
-    @Override
-    public double descontar() {
-        saldo = 0;
-        return 0;
+    public double descontar(double valorPasaje) {
+
+        double pago = saldo - valorPasaje;
+        return pago;
+    }
+
+    public void recargar(TarjetaPersonalizada tarjeta, double recarga) {
+
+        double valorRecarga = tarjeta.getSaldo() + recarga;
+        tarjeta.setSaldo(valorRecarga);
+
+    }
+
+    public int calcularEdad(TarjetaPersonalizada tarjeta) {
+
+        int calculoEdad = 0;
+
+        //ESTO ES PARA LAS FECHAS
+        Date fechaNacido = tarjeta.getFechaNacimiento();
+        Calendar fechaNacimientoCalendar = Calendar.getInstance();
+        fechaNacimientoCalendar.setTime(fechaNacido);
+
+        // DEBO SABER LA FECHA ACTUAL
+        Calendar fechaActual = Calendar.getInstance();
+
+        // CALCULO LA EDAD DEL DUEÑO DE LA TARJETA
+        calculoEdad = fechaActual.get(Calendar.YEAR) - fechaNacimientoCalendar.get(Calendar.YEAR);
+        return calculoEdad;
+
     }
 
 }

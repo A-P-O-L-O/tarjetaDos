@@ -2,7 +2,7 @@ package PQ.LOGICA;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,34 +17,26 @@ public final class TarjetaNoPersonalizada extends TuLlave implements Serializabl
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_nopersonalizada;
 
-    @Basic
-    private String nombrePropietario;
-    private Integer identificacion;
-    private String telefono;
-    private String sexo;
+    @Column
     private double saldo;
+    @Column
     private Integer numeroTarjeta;
-    @Temporal(TemporalType.DATE)
-    private Date fechaNacimiento;
     @Temporal(TemporalType.DATE)
     private Date fechaCreacion;
     @Temporal(TemporalType.DATE)
     private Date ultimoUso;
+    private boolean estado;
 
     public TarjetaNoPersonalizada() {
     }
 
-    public TarjetaNoPersonalizada(int id_nopersonalizada, String nombrePropietario, Integer identificacion, String telefono, String sexo, double saldo, Integer numeroTarjeta, Date fechaNacimiento, Date fechaCreacion, Date ultimoUso) {
+    public TarjetaNoPersonalizada(int id_nopersonalizada, double saldo, Integer numeroTarjeta, Date fechaCreacion, Date ultimoUso, boolean estado) {
         this.id_nopersonalizada = id_nopersonalizada;
-        this.nombrePropietario = nombrePropietario;
-        this.identificacion = identificacion;
-        this.telefono = telefono;
-        this.sexo = sexo;
         this.saldo = saldo;
         this.numeroTarjeta = numeroTarjeta;
-        this.fechaNacimiento = fechaNacimiento;
         this.fechaCreacion = fechaCreacion;
         this.ultimoUso = ultimoUso;
+        this.estado = estado;
     }
 
     public int getId_nopersonalizada() {
@@ -53,38 +45,6 @@ public final class TarjetaNoPersonalizada extends TuLlave implements Serializabl
 
     public void setId_nopersonalizada(int id_nopersonalizada) {
         this.id_nopersonalizada = id_nopersonalizada;
-    }
-
-    public String getNombrePropietario() {
-        return nombrePropietario;
-    }
-
-    public void setNombrePropietario(String nombrePropietario) {
-        this.nombrePropietario = nombrePropietario;
-    }
-
-    public Integer getIdentificacion() {
-        return identificacion;
-    }
-
-    public void setIdentificacion(Integer identificacion) {
-        this.identificacion = identificacion;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
     }
 
     public double getSaldo() {
@@ -103,14 +63,6 @@ public final class TarjetaNoPersonalizada extends TuLlave implements Serializabl
         this.numeroTarjeta = numeroTarjeta;
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
     public Date getFechaCreacion() {
         return fechaCreacion;
     }
@@ -127,8 +79,30 @@ public final class TarjetaNoPersonalizada extends TuLlave implements Serializabl
         this.ultimoUso = ultimoUso;
     }
 
-    @Override
-    public double descontar() {
-        return 0;
+    public boolean getEstado() {
+        return estado;
     }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public double descontar(double descontar) {
+
+        double pagar = saldo - descontar;
+        return pagar;
+
+    }
+
+    public void recargar(TarjetaNoPersonalizada tarjetaNo, double recarga) {
+
+        double valorRecarga = tarjetaNo.getSaldo() + recarga;
+        tarjetaNo.setSaldo(valorRecarga);
+
+    }
+
+    public boolean puedeIngresar(double valorPasaje) {
+        return saldo >= valorPasaje;
+    }
+
 }

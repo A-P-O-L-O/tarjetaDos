@@ -20,14 +20,14 @@ import javax.swing.JOptionPane;
  *
  * @author Elias Jaramillo
  */
-public class PagarNoPersonalizada extends javax.swing.JFrame {
+public class ZonalNoPersonalizada extends javax.swing.JFrame {
 
     controladoraLogicaNoPersonalizadas control = new controladoraLogicaNoPersonalizadas();
 
     /**
      * Creates new form Pagar
      */
-    public PagarNoPersonalizada() {
+    public ZonalNoPersonalizada() {
         initComponents();
     }
 
@@ -155,9 +155,9 @@ public class PagarNoPersonalizada extends javax.swing.JFrame {
 
             Integer numeroTarjeta = Integer.valueOf(txtDocumentoUno.getText().trim());
             try {
-                control.pagarNoPersonalizada(numeroTarjeta);
+                control.zonalNoPersonalizada(numeroTarjeta);
             } catch (Exception ex) {
-                Logger.getLogger(PagarNoPersonalizada.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ZonalNoPersonalizada.class.getName()).log(Level.SEVERE, null, ex);
             }
             txtDocumentoUno.setText(" ");
 

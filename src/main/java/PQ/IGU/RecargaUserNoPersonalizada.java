@@ -4,26 +4,31 @@
  */
 package PQ.IGU;
 
+//import PQ.LOGICA.ControladoraLogica;
 import PQ.LOGICA.ControladoraLogica;
-import PQ.LOGICA.TarjetaPersonalizada;
-import PQ.PERSISTENCIA.TarjetaPersonalizadaJpaController;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import PQ.LOGICA.controladoraLogicaNoPersonalizadas;
 import javax.swing.JOptionPane;
 
+//import PQ.LOGICA.TarjetaNoPersonalizada;
+//import PQ.LOGICA.TarjetaPersonalizada;
+//import PQ.PERSISTENCIA.TarjetaNoPersonalizadaJpaController;
+//import PQ.PERSISTENCIA.TarjetaPersonalizadaJpaController;
+//import java.util.List;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+//import javax.swing.JOptionPane;
 /**
  *
  * @author Elias Jaramillo
  */
-public class RecargaUser extends javax.swing.JFrame {
+public class RecargaUserNoPersonalizada extends javax.swing.JFrame {
 
-    ControladoraLogica control = new ControladoraLogica();
+    controladoraLogicaNoPersonalizadas control = new controladoraLogicaNoPersonalizadas();
 
     /**
      * Creates new form Recarga
      */
-    public RecargaUser() {
+    public RecargaUserNoPersonalizada() {
         initComponents();
     }
 
@@ -89,7 +94,7 @@ public class RecargaUser extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("INGRESA TU NUMERO DE DOCUMENTO");
+        jLabel5.setText("INGRESA TU NUMERO DE TARJETA");
 
         btnMenu1.setText("MENU");
         btnMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +107,10 @@ public class RecargaUser extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(181, 181, 181)
+                .addComponent(txtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +123,7 @@ public class RecargaUser extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
+                        .addGap(50, 50, 50)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -123,11 +132,7 @@ public class RecargaUser extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnRecargar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))))
-                .addContainerGap(57, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(181, 181, 181)
-                .addComponent(txtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,15 +143,15 @@ public class RecargaUser extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addComponent(btnRecargar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
+                .addGap(46, 46, 46)
                 .addComponent(btnMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addGap(104, 104, 104))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -174,7 +179,7 @@ public class RecargaUser extends javax.swing.JFrame {
     private void btnRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargarActionPerformed
 //
 
- if (txtDocumento.getText().isEmpty() || txtRecarga.getText().isEmpty()) {
+        if (txtDocumento.getText().isEmpty() || txtRecarga.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "El Campo Del Documento O El Campo de la Recarga Esta Vacio ",
                     "Error Al Recargar",
                     JOptionPane.WARNING_MESSAGE);
@@ -182,7 +187,7 @@ public class RecargaUser extends javax.swing.JFrame {
             Integer numeroTarjeta = Integer.valueOf(txtDocumento.getText().trim());
             double recarga = Double.parseDouble(txtRecarga.getText().trim());
             try {
-                control.recargaPersonanalizada(numeroTarjeta, recarga);
+                control.recargaNoPersonanalizada(numeroTarjeta, recarga);
             } catch (Exception ex) {
                 System.out.println("NO SE PUDO LLEVAR A CABO ESTO :(");
             }
@@ -190,10 +195,12 @@ public class RecargaUser extends javax.swing.JFrame {
             txtDocumento.setText(" ");
             txtRecarga.setText(" ");
         }
+
+
     }//GEN-LAST:event_btnRecargarActionPerformed
 
     private void btnMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu1ActionPerformed
-        UserGestion gestion = new UserGestion();
+        UserGestionNo gestion = new UserGestionNo();
         gestion.setVisible(true);
         gestion.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnMenu1ActionPerformed
@@ -215,7 +222,6 @@ public class RecargaUser extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Este campo solo acepta números y tiene un máximo de 15 dígitos.",
                     "Error", JOptionPane.WARNING_MESSAGE);
         }
-
 
     }//GEN-LAST:event_txtDocumentoKeyTyped
 
