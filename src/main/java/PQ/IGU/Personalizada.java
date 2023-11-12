@@ -264,6 +264,7 @@ public class Personalizada extends javax.swing.JFrame {
         Gestion gestion = new Gestion();
         gestion.setVisible(true);
         gestion.setLocationRelativeTo(null);
+        this.dispose();
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -271,6 +272,7 @@ public class Personalizada extends javax.swing.JFrame {
         Validacion validacion = new Validacion();
         validacion.setVisible(true);
         validacion.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped

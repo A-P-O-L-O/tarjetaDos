@@ -95,12 +95,16 @@ public class TipoDeBus extends javax.swing.JFrame {
         Pagar pagar = new Pagar();
         pagar.setVisible(true);
         pagar.setLocationRelativeTo(null);
+        this.dispose();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ZonalPagar zonalPagar = new ZonalPagar();
         zonalPagar.setVisible(true);
         zonalPagar.setLocationRelativeTo(null);
+        this.dispose();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

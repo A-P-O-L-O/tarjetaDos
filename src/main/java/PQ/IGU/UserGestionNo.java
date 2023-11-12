@@ -94,13 +94,17 @@ public class UserGestionNo extends javax.swing.JFrame {
         TipoBusNoPersonalizada tipoBusNoPersonalizada = new TipoBusNoPersonalizada();
         tipoBusNoPersonalizada.setVisible(true);
         tipoBusNoPersonalizada.setLocationRelativeTo(null);
+        this.dispose();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         RecargaUserNoPersonalizada recargaUserNoPersonalizada = new RecargaUserNoPersonalizada();
         recargaUserNoPersonalizada.setVisible(true);
         recargaUserNoPersonalizada.setLocationRelativeTo(null);
-                
+        this.dispose();
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

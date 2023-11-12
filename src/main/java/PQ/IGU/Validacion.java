@@ -70,6 +70,7 @@ public class Validacion extends javax.swing.JFrame {
         Trabajador trabajador = new Trabajador();
         trabajador.setVisible(true);
         trabajador.setLocationRelativeTo(null);
+        this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -78,7 +79,7 @@ public class Validacion extends javax.swing.JFrame {
         TipoTarjeta tipoTarjeta = new TipoTarjeta();
         tipoTarjeta.setVisible(true);
         tipoTarjeta.setLocationRelativeTo(null);
-        
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

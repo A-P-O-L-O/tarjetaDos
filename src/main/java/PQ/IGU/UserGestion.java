@@ -95,12 +95,16 @@ public class UserGestion extends javax.swing.JFrame {
         TipoDeBus tipoDeBus = new TipoDeBus();
         tipoDeBus.setVisible(true);
         tipoDeBus.setLocationRelativeTo(null);
+        this.dispose();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         RecargaUser recargaUser = new RecargaUser();
         recargaUser.setVisible(true);
         recargaUser.setLocationRelativeTo(null);
+        this.dispose();
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

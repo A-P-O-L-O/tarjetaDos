@@ -108,6 +108,8 @@ public class TipoTarjeta extends javax.swing.JFrame {
         UserGestionNo userGestion = new UserGestionNo();
         userGestion.setVisible(true);
         userGestion.setLocationRelativeTo(null);
+        this.dispose();
+
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -116,6 +118,8 @@ public class TipoTarjeta extends javax.swing.JFrame {
         UserGestion userGestion = new UserGestion();
         userGestion.setVisible(true);
         userGestion.setLocationRelativeTo(null);
+        this.dispose();
+
 
     }//GEN-LAST:event_jButton4ActionPerformed
 

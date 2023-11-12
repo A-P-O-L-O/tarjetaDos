@@ -154,6 +154,7 @@ public class NoPersonalizada extends javax.swing.JFrame {
         Gestion gestion = new Gestion();
         gestion.setVisible(true);
         gestion.setLocationRelativeTo(null);
+        this.dispose();
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -161,6 +162,7 @@ public class NoPersonalizada extends javax.swing.JFrame {
         Validacion validacion = new Validacion();
         validacion.setVisible(true);
         validacion.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

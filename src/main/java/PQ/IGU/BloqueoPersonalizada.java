@@ -44,6 +44,7 @@ public class BloqueoPersonalizada extends javax.swing.JFrame {
         tbTabla = new javax.swing.JTable();
         btnBloquear = new javax.swing.JButton();
         btnBloquear1 = new javax.swing.JButton();
+        btnBloquear2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -79,10 +80,17 @@ public class BloqueoPersonalizada extends javax.swing.JFrame {
             }
         });
 
-        btnBloquear1.setText("Activar");
+        btnBloquear1.setText("MENU");
         btnBloquear1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBloquear1ActionPerformed(evt);
+            }
+        });
+
+        btnBloquear2.setText("Activar");
+        btnBloquear2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBloquear2ActionPerformed(evt);
             }
         });
 
@@ -96,7 +104,8 @@ public class BloqueoPersonalizada extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnBloquear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnBloquear1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnBloquear1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBloquear2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(29, 29, 29))
         );
         jPanel2Layout.setVerticalGroup(
@@ -108,9 +117,11 @@ public class BloqueoPersonalizada extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addComponent(btnBloquear, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBloquear2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(btnBloquear1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(149, 149, 149))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -203,39 +214,24 @@ public class BloqueoPersonalizada extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnBloquear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBloquear1ActionPerformed
-        
-        //CONTROLO QUE LA TABLA NO ESTE VACIA
-        if (tbTabla.getRowCount() > 0) {
-            //CONTROLO QUE UNA FILA ESTE SELECIONADA A UN REGISTRO
-            if (tbTabla.getSelectedRow() != -1) {
 
-                //OBTENGO EL ID DE LA MASCOTA A ELIMINAR
-                int numeroTarjeta = Integer.parseInt(String.valueOf((tbTabla.getValueAt(tbTabla.getSelectedRow(), 0))));
-                //LLAMO AL METODO BORRAR
-                control.ActivarTarjeta(numeroTarjeta);
+        Gestion gestion = new Gestion();
+        gestion.setVisible(true);
+        gestion.setLocationRelativeTo(null);
+        this.dispose();
 
-                mostrarMensajes("Tarjeta ctivada Correctamente", "info", "RECORDATORIO");
-                cargarTabla();
 
-            } else {
-                mostrarMensajes("NO SELECIONÓ NINGUNA TARJETA", "Error", "ERROR");
-
-            }
-
-        } else {
-            mostrarMensajes("NO HAY NADA PARA ELIMINAR", "info", "RECORDATORIO");
-
-        }
-        
-        
-        
-     
     }//GEN-LAST:event_btnBloquear1ActionPerformed
+
+    private void btnBloquear2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBloquear2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBloquear2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBloquear;
     private javax.swing.JButton btnBloquear1;
+    private javax.swing.JButton btnBloquear2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

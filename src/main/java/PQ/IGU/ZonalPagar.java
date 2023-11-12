@@ -128,6 +128,8 @@ public class ZonalPagar extends javax.swing.JFrame {
         RecargaUser userRecarga = new RecargaUser();
         userRecarga.setVisible(true);
         userRecarga.setLocationRelativeTo(null);
+        this.dispose();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -151,7 +153,7 @@ public class ZonalPagar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtDocumentoUnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDocumentoUnoKeyTyped
-         int key = evt.getKeyChar();
+        int key = evt.getKeyChar();
 
         if (Character.isDigit(key) && txtDocumentoUno.getText().trim().length() < 15) {
             // INGRESO DE SOLO DIGITOS Y QUE SEAN MENOR A 15 DIGITOS

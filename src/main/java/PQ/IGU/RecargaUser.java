@@ -196,6 +196,7 @@ public class RecargaUser extends javax.swing.JFrame {
         UserGestion gestion = new UserGestion();
         gestion.setVisible(true);
         gestion.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_btnMenu1ActionPerformed
 
     private void txtDocumentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDocumentoFocusLost

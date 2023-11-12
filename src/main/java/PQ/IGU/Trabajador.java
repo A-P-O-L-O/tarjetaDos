@@ -150,6 +150,7 @@ public class Trabajador extends javax.swing.JFrame {
             Gestion gestion = new Gestion();
             gestion.setVisible(true);
             gestion.setLocationRelativeTo(null);
+            this.dispose();
 
         } else {
             JOptionPane.showMessageDialog(this, "Haz ingresado un admin no existente!",

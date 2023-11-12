@@ -143,6 +143,7 @@ public class PagarNoPersonalizada extends javax.swing.JFrame {
         RecargaUserNoPersonalizada userRecarga = new RecargaUserNoPersonalizada();
         userRecarga.setVisible(true);
         userRecarga.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

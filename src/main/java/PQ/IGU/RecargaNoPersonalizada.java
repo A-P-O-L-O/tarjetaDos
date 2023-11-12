@@ -192,37 +192,6 @@ public class RecargaNoPersonalizada extends javax.swing.JFrame {
             txtDocumento.setText(" ");
             txtRecarga.setText(" ");
         }
-
-//            
-//            TarjetaNoPersonalizadaJpaController tarjetaController = new TarjetaNoPersonalizadaJpaController();
-//            List<TarjetaNoPersonalizada> todasLasTarjetas = tarjetaController.getTodasLasTarjetas();
-//            
-//            boolean encontrado = false;
-//            
-//            for (TarjetaNoPersonalizada tarjeta : todasLasTarjetas) {
-//                if (tarjeta.getNumeroTarjeta().equals(numeroTarjeta)) {
-//                    String saldo = String.valueOf(tarjeta.getSaldo());
-//                    double finalSaldo = Double.parseDouble(saldo) + recarga;
-//                    lbSaldo.setText(String.valueOf(finalSaldo));
-//                    tarjeta.setSaldo(finalSaldo);
-//                    
-//                    try {
-//                        control.recargaNoPersonanalizada(tarjeta);
-//                    } catch (Exception ex) {
-//                        System.out.println("NO SE PUDO LLEVAR A CABO ESTO :(");
-//                    }
-//                    
-//                    encontrado = true; // Se ha encontrado una coincidencia
-//                    break; // Salir del bucle una vez encontrada una coincidencia
-//                }
-//            }
-//            
-//            if (!encontrado) {
-//                JOptionPane.showMessageDialog(this, "El número de tarjeta no se encuentra registrado",
-//                        "Error Al Recargar",
-//                        JOptionPane.WARNING_MESSAGE);
-//            }
-
     }//GEN-LAST:event_btnRecargarActionPerformed
 
     private void btnMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu1ActionPerformed
@@ -230,6 +199,7 @@ public class RecargaNoPersonalizada extends javax.swing.JFrame {
         Gestion gestion = new Gestion();
         gestion.setVisible(true);
         gestion.setLocationRelativeTo(null);
+        this.dispose();
 
     }//GEN-LAST:event_btnMenu1ActionPerformed
 
